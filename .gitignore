@@ -1,0 +1,10 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Benchmarks
+benchmarks/
+*.ini
+
+# Logs
+*.log
