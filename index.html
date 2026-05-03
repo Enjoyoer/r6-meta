@@ -957,7 +957,7 @@
 
     function renderAll() {
       renderStats();
-      renderTable("loadoutTable", state.filtered.slice(0, 80));
+      renderTable("loadoutTable", state.filtered);
       renderTable("databaseTable", state.filtered);
       $("resultCount").textContent = `${state.filtered.length} result${state.filtered.length === 1 ? "" : "s"}`;
       $("databaseCount").textContent = `${state.filtered.length} of ${state.rows.length} rows shown`;
