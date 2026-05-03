@@ -441,6 +441,19 @@
       line-height: 1.45;
     }
 
+    .compare-row {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 0 10px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--text);
+    }
+
     .weapon-card {
       display: grid;
       gap: 12px;
@@ -555,7 +568,7 @@
     <aside class="sidebar">
       <div class="brand">
         <h1>R6 Meta Armory</h1>
-      <p>Y11S1 loadouts and attachment trends.</p>
+        <p>Y11S1 loadouts and attachment trends.</p>
       </div>
 
       <nav class="nav" aria-label="Primary">
@@ -933,7 +946,7 @@
     function renderCompare() {
       const pinned = state.rows.filter(row => state.pins.has(row._key));
       $("pinnedList").innerHTML = pinned.length ? pinned.map(row => `
-        <button class="operator-row" data-focus-row="${escapeAttr(row._key)}">
+        <button class="compare-row" data-focus-row="${escapeAttr(row._key)}">
           <span>${escapeHtml(row.Operator)} - ${escapeHtml(row.Weapon)}</span>
           <span>${escapeHtml(row.Muzzle)}</span>
         </button>
