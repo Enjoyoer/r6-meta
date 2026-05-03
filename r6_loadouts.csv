@@ -1,0 +1,213 @@
+Category,Weapon,Operator,Optic,Muzzle,Grip,Underbarrel
+Assault Rifle,L85A2,Sledge,Magnified,Suppressor,Vertical,None
+Assault Rifle,L85A2,Thatcher,Magnified,Flash Hider,Vertical,None
+Assault Rifle,AR33,Thatcher,Magnified,Flash Hider,Vertical,None
+Assault Rifle,AR33,Flores,Magnified,Flash Hider,Vertical,None
+Assault Rifle,G36C,Ash,Magnified,Flash Hider,Vertical,None
+Assault Rifle,G36C,Iana,Magnified,Flash Hider,Vertical,None
+Assault Rifle,R4C,Ash,Non-Magnified,Extended Barrel,Vertical,None
+Assault Rifle,R4C,Ram,Magnified,Flash Hider,Vertical,None
+Assault Rifle,556xi,Thermite,Magnified,Compensator,Vertical,None
+Assault Rifle,556xi,Osa,Magnified,Compensator,Vertical,None
+Assault Rifle,F2,Twitch,Magnified,Flash Hider,Vertical,None
+Assault Rifle,F2,Solid Snake,Non-Magnified,Extended Barrel,Vertical,None
+Assault Rifle,AK-12,Fuze,Magnified,Flash Hider,Vertical,None
+Assault Rifle,AK-12,Ace,Magnified,Flash Hider,Vertical,None
+Assault Rifle,552 Commando,IQ,Magnified,Extended Barrel,Vertical,None
+Assault Rifle,552 Commando,Grim,Magnified,Extended Barrel,Vertical,None
+Assault Rifle,AUG A2,IQ,Magnified,Flash Hider,N/A,None
+Assault Rifle,AUG A2,Wamai,Non-Magnified,Flash Hider,N/A,None
+Assault Rifle,416-C Carbine,Jäger,Non-Magnified,Extended Barrel,Vertical,None
+Assault Rifle,C8-SFW,Buck,Magnified,Extended Barrel,N/A,None
+Assault Rifle,Mk17 CQB,Blackbeard,Iron Sights,Extended Barrel,Angled/Horizontal,None
+Assault Rifle,Para-308,Capitão,Magnified,Extended Barrel,Angled,None
+Assault Rifle,Para-308,Brava,Magnified,Extended Barrel,Vertical,None
+Assault Rifle,Type-89,Hibana,Magnified,Flash Hider,Angled,None
+Assault Rifle,C7E,Jackal,Magnified,Flash Hider,Vertical,None
+Assault Rifle,M762,Zofia,Magnified,Flash Hider,Vertical,None
+Assault Rifle,V308,Lion,Magnified,Flash Hider,Vertical,None
+Assault Rifle,Spear .308,Finka,Magnified,Flash Hider,Vertical,None
+Assault Rifle,Spear .308,Thunderbird,Non-Magnified,Extended Barrel,Vertical,None
+Assault Rifle,M4,Striker,Magnified,Flash Hider,Vertical,None
+Assault Rifle,M4,Maverick,Magnified,Suppressor,Vertical,None
+Assault Rifle,AK-74M,Nomad,Magnified,Flash Hider,N/A,None
+Assault Rifle,AK-74M,Deimos,Magnified,Flash Hider,Vertical,None
+Assault Rifle,ARX200,Nomad,Magnified,Compensator,Vertical,None
+Assault Rifle,ARX200,Iana,Magnified,Flash Hider,Angled,None
+Assault Rifle,F90,Gridlock,Magnified,Extended Barrel,Vertical,None
+Assault Rifle,Commando 9,Sentry,Non-Magnified,Extended Barrel,Vertical,None
+Assault Rifle,Commando 9,Mozzie,Non-Magnified,Extended Barrel,Angled/Horizontal,None
+Assault Rifle,SC3000K,Zero,Magnified,Extended Barrel,Vertical,None
+Assault Rifle,POF-9,Sens,Magnified,Extended Barrel,Vertical,None
+Assault Rifle,PCX-33,Skopós,Non-Magnified,Extended Barrel,Vertical,None
+Light Machine Gun,6P41,Fuze,Magnified,Flash Hider,Vertical,None
+Light Machine Gun,6P41,Finka,Magnified,Flash Hider,Horizontal,None
+Light Machine Gun,G8A1,IQ,Magnified,Compensator,Vertical,None
+Light Machine Gun,G8A1,Amaru,Non-Magnified,Compensator,Horizontal,None
+Light Machine Gun,M249,Striker,Magnified,Flash Hider,Vertical,None
+Light Machine Gun,M249,Capitão,Magnified,Flash Hider,Horizontal,None
+Light Machine Gun,M249,Rauora,Magnified,Flash Hider,Horizontal,None
+Light Machine Gun,T95-LSW,Ying,Magnified,Flash Hider,Horizontal,None
+Light Machine Gun,T95-LSW,Flores,Magnified,Flash Hider,Vertical,None
+Light Machine Gun,LMG-E,Zofia,Magnified,Compensator,Vertical,None
+Light Machine Gun,LMG-E,Ram,Magnified,Compensator,Vertical,None
+Light Machine Gun,ALDA 5.56,Maestro,Non-Magnified,Flash Hider,Horizontal,None
+Light Machine Gun,M249 SAW,Gridlock,Magnified,Flash Hider,Horizontal,None
+Light Machine Gun,DP27,Tachanka,Holo B or Reflex C,N/A,N/A,N/A
+Submachine Gun,FMG-9,Smoke,Non-Magnified,Extended Barrel,N/A,None
+Submachine Gun,FMG-9,Nøkk,Magnified,Compensator,N/A,None
+Submachine Gun,FMG-9,Denali,Non-Magnified,Extended Barrel,N/A,None
+Submachine Gun,MP5K,Mute,Non-Magnified,Flash Hider,N/A,None
+Submachine Gun,MP5K,Wamai,Non-Magnified,Flash Hider,N/A,None
+Submachine Gun,UMP45,Castle,Non-Magnified,Extended Barrel,Horizontal,None
+Submachine Gun,UMP45,Pulse,Non-Magnified,Extended Barrel,Horizontal,None
+Submachine Gun,P90,Doc,Non-Magnified,Compensator,N/A,None
+Submachine Gun,P90,Rook,Non-Magnified,Compensator,N/A,None
+Submachine Gun,P90,Solis,Non-Magnified,Compensator,N/A,None
+Submachine Gun,MP5,Doc,Non-Magnified,Compensator,Horizontal,None
+Submachine Gun,MP5,Rook,Non-Magnified,Compensator,Horizontal,None
+Submachine Gun,MP5,Melusi,Non-Magnified,Compensator,Horizontal,None
+Submachine Gun,9x19VSN,Kapkan,Non-Magnified,Extended Barrel,Vertical,None
+Submachine Gun,9x19VSN,Tachanka,Non-Magnified,Extended Barrel,Vertical,None
+Submachine Gun,9x19VSN,Azami,Non-Magnified,Extended Barrel,Vertical,None
+Submachine Gun,MP7,Bandit,Non-Magnified,Compensator,N/A,None
+Submachine Gun,MP7,Zero,Magnified,Compensator,N/A,None
+Submachine Gun,MP7,Fenrir,Non-Magnified,Suppressor,N/A,None
+Submachine Gun,9mm C1,Frost,Non-Magnified,Extended Barrel,Horizontal,None
+Submachine Gun,MPX,Valkyrie,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,MPX,Warden,Non-Magnified,Compensator,Horizontal,None
+Submachine Gun,MPX,Tubarão,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,M12,Caveira,Non-Magnified,Extended Barrel,N/A,None
+Submachine Gun,MP5SD,Echo,Non-Magnified,N/A,Vertical,None
+Submachine Gun,PDW9,Jackal,Magnified,Extended Barrel,Vertical,None
+Submachine Gun,PDW9,Osa,Magnified,Extended Barrel,Vertical,None
+Submachine Gun,Vector .45 ACP,Mira,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,Vector .45 ACP,Goyo,Non-Magnified,Compensator,Angled,None
+Submachine Gun,T-5 SMG,Lesion,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,T-5 SMG,Oryx,Non-Magnified,Compensator,Horizontal,None
+Submachine Gun,Scorpion EVO 3,Ela,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,Scorpion EVO 3,Denali,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,K1A,Vigil,Non-Magnified,Extended Barrel,Vertical,None
+Submachine Gun,Mx4 Storm,Alibi,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,AUG A3,Kaid,Non-Magnified,Extended Barrel,Vertical,None
+Submachine Gun,P10 Roni,Mozzie,Non-Magnified,Compensator,Angled,None
+Submachine Gun,P10 Roni,Aruni,Non-Magnified,Compensator,Vertical,None
+Submachine Gun,UZK50GI,Thorn,Non-Magnified,Extended Barrel,Angled,None
+Machine Pistol,SMG-11,Smoke,Non-Magnified,Compensator,Vertical,None
+Machine Pistol,SMG-11,Mute,Non-Magnified,Muzzle Brake,Vertical,None
+Machine Pistol,SMG-11,Amaru,Non-Magnified,Muzzle Brake,Vertical,None
+Machine Pistol,SMG-11,Solis,Non-Magnified,Compensator,Vertical,None
+Machine Pistol,Bearing 9,Glaz,Non-Magnified,Compensator,N/A,None
+Machine Pistol,Bearing 9,Tachanka,Non-Magnified,Compensator,N/A,None
+Machine Pistol,Bearing 9,Hibana,Non-Magnified,Compensator,N/A,None
+Machine Pistol,Bearing 9,Echo,Non-Magnified,Compensator,N/A,None
+Machine Pistol,Bearing 9,Thunderbird,Non-Magnified,Compensator,N/A,None
+Machine Pistol,C75,Dokkaebi,N/A,Suppressor,N/A,Laser
+Machine Pistol,C75,Vigil,N/A,Suppressor,N/A,Laser
+Machine Pistol,C75,Kali,N/A,Suppressor,N/A,None
+Machine Pistol,C75,Thorn,N/A,Suppressor,N/A,None
+Machine Pistol,C75,Sentry,N/A,Suppressor,N/A,None
+Machine Pistol,SMG-12,Dokkaebi,Non-Magnified,N/A,Vertical,Laser
+Machine Pistol,SMG-12,Vigil,Non-Magnified,N/A,Vertical,Laser
+Machine Pistol,SMG-12,Warden,Non-Magnified,N/A,Vertical,None
+Machine Pistol,SPSMG9,Clash,Non-Magnified,Compensator,N/A,None
+Machine Pistol,SPSMG9,Kali,Non-Magnified,Compensator,N/A,None
+Machine Pistol,Reaper Mk2,Rauora,N/A,Compensator,N/A,Laser
+Machine Pistol,Reaper Mk2,Sledge,N/A,Compensator,N/A,Laser
+Machine Pistol,Reaper Mk2,Ying,N/A,Compensator,N/A,Laser
+Machine Pistol,Reaper Mk2,Rook,N/A,Compensator,N/A,None
+Machine Pistol,Reaper Mk2,Pulse,N/A,Compensator,N/A,None
+Machine Pistol,Reaper Mk2,Oryx,N/A,Compensator,N/A,Laser
+Machine Pistol,Reaper Mk2,Maverick,N/A,Compensator,N/A,Laser
+Marksman Rifle,417,Twitch,Magnified B,Muzzle Brake,Angled,None
+Marksman Rifle,417,Lion,Magnified A,Muzzle Brake,Angled,Laser
+Marksman Rifle,417,Sens,Magnified A,Muzzle Brake,Angled,None
+Marksman Rifle,417,Rauora,Magnified B,Muzzle Brake,Angled,None
+Marksman Rifle,OTs-03,Glaz,Non-Magnified,Muzzle Brake,Vertical,None
+Marksman Rifle,CAMRS,Buck,Magnified A,Muzzle Brake,N/A,None
+Marksman Rifle,CAMRS,Brava,Magnified B,Muzzle Brake,Angled,None
+Marksman Rifle,SR-25,Blackbeard,Non-Magnified,Muzzle Brake,Angled,Laser
+Marksman Rifle,SR-25,Flores,Magnified B,Muzzle Brake,Vertical,None
+Marksman Rifle,SR-25,Striker,Magnified B,Muzzle Brake,Vertical,None
+Marksman Rifle,Mk14 EBR,Dokkaebi,Magnified A,Muzzle Brake,Angled,None
+Marksman Rifle,Mk14 EBR,Aruni,Magnified B,Muzzle Brake,Vertical,None
+Marksman Rifle,AR-15 .50,Maverick,Telescopic,Muzzle Brake,Vertical,None
+Marksman Rifle,AR-15 .50,Tubarão,Magnified A,Muzzle Brake,Angled,None
+Marksman Rifle,PMR90A2,Thatcher,Magnified,Muzzle Brake,Vertical,None
+Marksman Rifle,PMR90A2,Capitão,Magnified,Muzzle Brake,Angled,None
+Marksman Rifle,PMR90A2,Hibana,Magnified,Suppressor,Vertical,None
+Marksman Rifle,PMR90A2,Nøkk,Magnified,Suppressor,Vertical,None
+Marksman Rifle,PMR90A2,Solid Snake,Magnified,Suppressor,Vertical,None
+Shotgun,M590A1,Sledge,Non-Magnified,N/A,N/A,Laser
+Shotgun,M590A1,Thatcher,Non-Magnified,N/A,N/A,Laser
+Shotgun,M590A1,Smoke,Non-Magnified,N/A,N/A,None
+Shotgun,M590A1,Mute,Non-Magnified,N/A,N/A,None
+Shotgun,M590A1,Warden,Non-Magnified,N/A,N/A,None
+Shotgun,M590A1,Deimos,Non-Magnified,N/A,N/A,Laser
+Shotgun,M1014,Thermite,Non-Magnified,N/A,N/A,Laser
+Shotgun,M1014,Castle,Non-Magnified,N/A,N/A,None
+Shotgun,M1014,Pulse,Non-Magnified,N/A,N/A,Laser
+Shotgun,M1014,Ace,Non-Magnified,N/A,N/A,Laser
+Shotgun,SG-CQB,Twitch,Non-Magnified,N/A,Horizontal,Laser
+Shotgun,SG-CQB,Doc,Non-Magnified,N/A,Horizontal,None
+Shotgun,SG-CQB,Rook,Non-Magnified,N/A,Horizontal,None
+Shotgun,SG-CQB,Lion,Non-Magnified,N/A,Horizontal,Laser
+Shotgun,SG-CQB,Grim,Non-Magnified,N/A,Horizontal,Laser
+Shotgun,SASG-12,Kapkan,Non-Magnified,None,Vertical,None
+Shotgun,SASG-12,Finka,Non-Magnified,Suppressor,Angled,Laser
+Shotgun,SASG-12,Fenrir,Non-Magnified,None,Vertical,None
+Shotgun,M870,Bandit,Iron Sight,N/A,N/A,None
+Shotgun,M870,Jäger,Iron Sight,N/A,N/A,None
+Shotgun,M870,Thorn,Iron Sight,N/A,N/A,None
+Shotgun,M870,Sentry,Iron Sight,N/A,N/A,None
+Shotgun,Super 90,Frost,Iron Sight,N/A,N/A,None
+Shotgun,Super 90,Melusi,Iron Sight,N/A,N/A,None
+Shotgun,SPAS-12,Valkyrie,Iron Sight,N/A,N/A,None
+Shotgun,SPAS-12,Oryx,Iron Sight,N/A,N/A,Laser
+Shotgun,SPAS-15,Caveira,Non-Magnified,N/A,N/A,None
+Shotgun,SPAS-15,Thunderbird,Non-Magnified,N/A,N/A,None
+Shotgun,Supernova,Hibana,Non-Magnified,None,N/A,Laser
+Shotgun,Supernova,Echo,Non-Magnified,Suppressor,N/A,None
+Shotgun,Supernova,Amaru,Non-Magnified,Suppressor,N/A,Laser
+Shotgun,ITA12L,Jackal,Non-Magnified,N/A,N/A,Laser
+Shotgun,ITA12L,Mira,Non-Magnified,N/A,N/A,None
+Shotgun,ITA12L,Solis,Non-Magnified,N/A,N/A,None
+Shotgun,SIX12,Ying,Iron Sight,N/A,N/A,Laser
+Shotgun,SIX12,Lesion,Iron Sight,N/A,N/A,None
+Shotgun,SIX12,Nøkk,Iron Sight,N/A,N/A,None
+Shotgun,FO-12,Ela,Non-Magnified,Extended Barrel,Vertical,None
+Shotgun,BOSG 12.2,Dokkaebi,Magnified,N/A,Angled,Laser
+Shotgun,BOSG 12.2,Vigil,Magnified,N/A,Angled,None
+Shotgun,ACS12,Maestro,Magnified,N/A,Vertical,None
+Shotgun,ACS12,Alibi,Magnified,N/A,Vertical,None
+Shotgun,ACS12,Azami,Magnified B,N/A,Vertical,None
+Shotgun,TCSG12,Kaid,Magnified,Suppressor,Vertical,None
+Shotgun,TCSG12,Goyo,Magnified,Suppressor,Vertical,None
+Shotgun,TCSG12,Sentry,Magnified,Suppressor,Vertical,None
+Secondary Shotgun,ITA12S,Jackal,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Mira,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Frost,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Amaru,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Melusi,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Thunderbird,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Striker,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,ITA12S,Thermite,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,Bailiff 410,Doc,N/A,N/A,N/A,Laser
+Secondary Shotgun,Bailiff 410,Alibi,N/A,N/A,N/A,Laser
+Secondary Shotgun,Bailiff 410,Maestro,N/A,N/A,N/A,Laser
+Secondary Shotgun,Bailiff 410,Oryx,N/A,N/A,N/A,Laser
+Secondary Shotgun,Bailiff 410,Grim,N/A,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Sentry,Iron Sight,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Castle,Iron Sight,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Wamai,Iron Sight,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Clash,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Gridlock,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Brava,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,Super Shorty,Mozzie,Non-Magnified,N/A,N/A,Laser
+Secondary Shotgun,Glaive-12,Denali,Non-Magnified,N/A,Angled,Laser
+Handgun,ALL,Any Operator,N/A,Muzzle Brake,N/A,Laser
+Handgun,P12,IQ,N/A,Suppressor,N/A,None
+Handgun,Luison (PRB92),Caveira,N/A,N/A,N/A,None
+Handgun,P226,Kali,N/A,Muzzle Brake,N/A,None
+Handgun,.44 Vendetta,Deimos,N/A,N/A,N/A,None
+Handgun,Tacit .45,Solid Snake,N/A,N/A,N/A,None

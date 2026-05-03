@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R6 Attachment Meta — Y11S1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* === TOKENS === */
+    :root,
+    [data-theme="light"] {
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #fbfbf9;
+      --color-surface-offset: #f0ede8;
+      --color-surface-dynamic: #e6e4df;
+      --color-divider: #dcd9d5;
+      --color-border: #d4d1ca;
+      --color-text: #28251d;
+      --color-text-muted: #7a7974;
+      --color-text-faint: #bab9b4;
+      --color-primary: #01696f;
+      --color-primary-hover: #0c4e54;
+      --color-primary-highlight: #cedcd8;
+      --color-orange: #da7101;
+      --color-gold: #d19900;
+      --color-blue: #006494;
+      --color-purple: #7a39bb;
+      --color-success: #437a22;
+      --color-error: #a12c7b;
+      --color-notification: #a13544;
+      --shadow-sm: 0 1px 2px oklch(0.2 0.01 80/0.06);
+      --shadow-md: 0 4px 12px oklch(0.2 0.01 80/0.08);
+      --shadow-lg: 0 12px 32px oklch(0.2 0.01 80/0.12);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --accent-fh: #01696f;
+      --accent-comp: #d19900;
+      --accent-ext: #a12c7b;
+      --accent-mb: #006494;
+      --accent-supp: #7a39bb;
+      --accent-na: #bab9b4;
+      --header-h: 64px;
+      --sidebar-w: 280px;
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #111110;
+      --color-surface: #181715;
+      --color-surface-2: #1e1d1b;
+      --color-surface-offset: #232220;
+      --color-surface-dynamic: #2d2c2a;
+      --color-divider: #242321;
+      --color-border: #333230;
+      --color-text: #d8d7d4;
+      --color-text-muted: #797876;
+      --color-text-faint: #4a4947;
+      --color-primary: #4f98a3;
+      --color-primary-hover: #3a7d88;
+      --color-primary-highlight: #1e3335;
+      --color-orange: #fdab43;
+      --color-gold: #e8af34;
+      --color-blue: #5591c7;
+      --color-purple: #a86fdf;
+      --color-success: #6daa45;
+      --color-error: #d163a7;
+      --color-notification: #dd6974;
+      --shadow-sm: 0 1px 2px oklch(0 0 0/0.25);
+      --shadow-md: 0 4px 12px oklch(0 0 0/0.35);
+      --shadow-lg: 0 12px 32px oklch(0 0 0/0.5);
+      --accent-fh: #4f98a3;
+      --accent-comp: #e8af34;
+      --accent-ext: #d163a7;
+      --accent-mb: #5591c7;
+      --accent-supp: #a86fdf;
+      --accent-na: #4a4947;
+      color-scheme: dark;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg: #111110;
+        --color-surface: #181715;
+        --color-surface-2: #1e1d1b;
+        --color-surface-offset: #232220;
+        --color-surface-dynamic: #2d2c2a;
+        --color-divider: #242321;
+        --color-border: #333230;
+        --color-text: #d8d7d4;
+        --color-text-muted: #797876;
+        --color-text-faint: #4a4947;
+        --color-primary: #4f98a3;
+        --color-primary-hover: #3a7d88;
+        --color-primary-highlight: #1e3335;
+        --color-orange: #fdab43;
+        --color-gold: #e8af34;
+        --color-blue: #5591c7;
+        --color-purple: #a86fdf;
+        --color-success: #6daa45;
+        --color-error: #d163a7;
+        --color-notification: #dd6974;
+        --shadow-sm: 0 1px 2px oklch(0 0 0/0.25);
+        --shadow-md: 0 4px 12px oklch(0 0 0/0.35);
+        --shadow-lg: 0 12px 32px oklch(0 0 0/0.5);
+        --accent-fh: #4f98a3;
+        --accent-comp: #e8af34;
+        --accent-ext: #d163a7;
+        --accent-mb: #5591c7;
+        --accent-supp: #a86fdf;
+        --accent-na: #4a4947;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem
+    }
+
+    body {
+      min-height: 100dvh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.5;
+      transition: background var(--transition), color var(--transition)
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%
+    }
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit
+    }
+
+    a,
+    button,
+    [role="button"] {
+      transition: color var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition), opacity var(--transition)
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm)
+    }
+
+    ::selection {
+      background: oklch(from var(--color-primary) l c h/0.25);
+      color: var(--color-text)
+    }
+
+    /* === LAYOUT === */
+    .app-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    @media (max-width: 1024px) {
+      .app-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sidebar {
+      background: var(--color-surface);
+      border-right: 1px solid var(--color-border);
+      padding: var(--space-6) var(--space-5);
+      position: sticky;
+      top: var(--header-h);
+      height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      z-index: 50;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border) transparent;
+    }
+
+    /* Global Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-text-muted);
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-4);
+      }
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-1);
+    }
+
+    .results-count {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-primary);
+      background: var(--color-primary-highlight);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid oklch(from var(--color-primary) l c h / 0.1);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-h);
+      background: color-mix(in oklch, var(--color-bg) 85%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 var(--space-5);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      max-width: 1600px;
+      margin: 0;
+    }
+
+    .category-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      justify-content: space-between;
+      padding: 10px 0;
+      position: relative;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: center;
+      gap: 16px;
+      height: 28px;
+      position: relative;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .meta-track {
+      height: 100%;
+      background: var(--color-surface-offset);
+      border-radius: 6px;
+      display: flex;
+      gap: 2px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--color-border);
+    }
+
+    .meta-pill {
+      height: 100%;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: crosshair;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 96px;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .grid-line {
+      width: 1px;
+      height: 100%;
+      background: var(--color-border);
+      opacity: 0.3;
+    }
+
+    .custom-tooltip {
+      position: fixed;
+      background: rgba(0, 0, 0, 0.95);
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 9999;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      min-width: 160px;
+    }
+
+    .tooltip-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 2px 0;
+    }
+
+    .tooltip-color {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .logo-sub {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .season-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-border);
+    }
+
+    .main {
+      padding: var(--space-6) var(--space-8) var(--space-16);
+      max-width: 1600px;
+      margin: 0;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .section-title::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: var(--color-border);
+      opacity: 0.3;
+    }
+
+    /* === HERO === */
+    .hero {
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-4)
+    }
+
+    .hero-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-3)
+    }
+
+    .hero-desc {
+      display: none
+    }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+      text-decoration: none;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      background: var(--color-primary-highlight);
+      border: 1px solid oklch(from var(--color-primary) l c h/0.2);
+      transition: var(--transition)
+    }
+
+    .source-link:hover {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      transform: translateY(-1px)
+    }
+
+    .source-link svg {
+      width: 12px;
+      height: 12px
+    }
+
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      background: oklch(from var(--pill-color, var(--color-text-faint)) l c h / 0.08);
+      border: 1px solid oklch(from var(--pill-color, var(--color-text-faint)) l c h / 0.2);
+      color: var(--pill-color, var(--color-text-muted));
+      white-space: nowrap;
+    }
+
+    .filter-pill:hover {
+      background: oklch(from var(--pill-color, var(--color-text-faint)) l c h / 0.15);
+      border-color: oklch(from var(--pill-color, var(--color-text-faint)) l c h / 0.4);
+      transform: translateY(-1px);
+    }
+
+    .filter-pill.active {
+      background: var(--pill-color);
+      border-color: var(--pill-color);
+      color: var(--color-bg);
+      box-shadow: 0 4px 12px oklch(from var(--pill-color) l c h / 0.3);
+    }
+
+    /* === KPI GRID === */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .kpi-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      transition: var(--transition);
+    }
+
+    .kpi-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    .kpi-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+    }
+
+    .kpi-value {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .kpi-accent {
+      width: 100%;
+      height: 2px;
+      border-radius: var(--radius-full);
+      margin-top: auto;
+    }
+
+    /* === CHARTS GRID === */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-6)
+    }
+
+    .chart-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column
+    }
+
+    .chart-card.wide {
+      grid-column: 1/-1
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+      gap: var(--space-4)
+    }
+
+    .chart-title {
+      font-size: var(--text-base);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-3)
+    }
+
+    .chart-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px
+    }
+
+    @media(max-width:600px) {
+      .chart-body {
+        flex-direction: column;
+        align-items: stretch
+      }
+    }
+
+    .chart-main {
+      flex: 1.5;
+      position: relative;
+      height: 260px
+    }
+
+    .chart-wrap {
+      position: relative;
+      min-height: 260px;
+      flex: 1
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: var(--space-2);
+      overflow-x: auto;
+      scrollbar-width: none
+    }
+
+    .legend::-webkit-scrollbar {
+      display: none
+    }
+
+    .legend-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-4)
+    }
+
+    .legend-card {
+      background: var(--color-surface-offset);
+      padding: var(--space-3);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border)
+    }
+
+    .legend-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2)
+    }
+
+    .legend-item {
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--pill-color);
+      white-space: nowrap
+    }
+
+    .legend-item::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4)
+    }
+
+    @media(max-width:1200px) {
+      .charts-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:800px) {
+      .charts-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .filter-select-sm {
+      padding: 6px 10px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-offset);
+      color: var(--color-text);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      outline: none;
+      width: 100%
+    }
+
+    .filter-select-sm:hover {
+      border-color: var(--color-primary)
+    }
+
+    /* === INSIGHTS === */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
+      overflow-x: auto
+    }
+
+    @media(max-width:1200px) {
+      .insights-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    @media(max-width:800px) {
+      .insights-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    .insight-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3) var(--space-4);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      min-width: 180px;
+      flex: 1
+    }
+
+    .insight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-1)
+    }
+
+    .insight-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      background: var(--color-surface-offset);
+      color: var(--color-primary)
+    }
+
+    .insight-icon svg {
+      width: 16px;
+      height: 16px
+    }
+
+    .insight-tag {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted)
+    }
+
+    .insight-stat {
+      font-size: var(--text-base);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1
+    }
+
+    .insight-desc {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+      margin-top: var(--space-1)
+    }
+
+    .insight-bar {
+      height: 3px;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-dynamic);
+      margin-top: var(--space-2);
+      overflow: hidden
+    }
+
+    .insight-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1)
+    }
+
+    /* === TABLE SECTION === */
+    .table-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+      margin-bottom: var(--space-5)
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: var(--space-2) var(--space-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-sm)
+    }
+
+    .search-input:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -1px;
+      border-color: transparent
+    }
+
+    .search-input::placeholder {
+      color: var(--color-text-faint)
+    }
+
+    .filter-select:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -1px
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      position: relative
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: var(--text-sm)
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--color-surface-offset);
+      box-shadow: 0 1px 0 var(--color-border)
+    }
+
+    th {
+      padding: var(--space-4) var(--space-4);
+      text-align: left;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition)
+    }
+
+    th:hover {
+      color: var(--color-text);
+      background: oklch(from var(--color-text) l c h/0.03)
+    }
+
+    th .sort-icon {
+      display: inline-block;
+      margin-left: 4px;
+      opacity: 0.4;
+      font-family: monospace;
+      font-size: 10px
+    }
+
+    th.sorted {
+      color: var(--color-text)
+    }
+
+    th.sorted .sort-icon {
+      opacity: 1;
+      color: var(--color-primary)
+    }
+
+    td {
+      padding: var(--space-4) var(--space-4);
+      border-top: 1px solid var(--color-divider);
+      font-variant-numeric: tabular-nums;
+      vertical-align: middle;
+      transition: background var(--transition)
+    }
+
+    tr:hover td {
+      background: oklch(from var(--color-primary) l c h/0.02)
+    }
+
+    .match-highlight {
+      background: oklch(from var(--color-primary) l c h/0.15);
+      color: var(--color-primary);
+      font-weight: 700;
+      padding: 0 2px;
+      border-radius: 2px
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      white-space: nowrap;
+      gap: 4px
+    }
+
+    .badge::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.7
+    }
+
+    .badge-fh {
+      background: oklch(from var(--accent-fh) l c h/0.12);
+      color: var(--accent-fh)
+    }
+
+    .badge-comp {
+      background: oklch(from var(--accent-comp) l c h/0.12);
+      color: var(--accent-comp)
+    }
+
+    .badge-ext {
+      background: oklch(from var(--accent-ext) l c h/0.12);
+      color: var(--accent-ext)
+    }
+
+    .badge-mb {
+      background: oklch(from var(--accent-mb) l c h/0.12);
+      color: var(--accent-mb)
+    }
+
+    .badge-supp {
+      background: oklch(from var(--accent-supp) l c h/0.15);
+      color: var(--accent-supp)
+    }
+
+    .badge-laser {
+      background: oklch(from var(--color-orange) l c h/0.12);
+      color: var(--color-orange)
+    }
+
+    .badge-na {
+      background: oklch(from var(--accent-na) l c h/0.1);
+      color: var(--color-text-faint)
+    }
+
+    .grip-tag {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted)
+    }
+
+    .empty-table {
+      text-align: center;
+      padding: var(--space-12) var(--space-8);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm)
+    }
+
+    /* === FOOTER === */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-6);
+      text-align: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-faint)
+    }
+
+    /* === SCROLL REVEAL === */
+    .fade-in {
+      opacity: 1
+    }
+
+    @supports (animation-timeline:scroll()) {
+      .fade-in {
+        opacity: 0;
+        animation: rv linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%
+      }
+
+      @keyframes rv {
+        to {
+          opacity: 1
+        }
+      }
+    }
+
+    @media(max-width:600px) {
+      .main {
+        padding: var(--space-6) var(--space-4) var(--space-12)
+      }
+
+      .header-inner {
+        gap: var(--space-2)
+      }
+
+      .season-badge {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-label="R6 Meta" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="var(--color-primary)" opacity="0.15" />
+          <path d="M8 10h7a5 5 0 0 1 0 10h-7V10z" stroke="var(--color-primary)" stroke-width="2" stroke-linejoin="round"
+            fill="none" />
+          <path d="M15 20l5 5" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" />
+          <circle cx="22" cy="14" r="3" stroke="var(--color-primary)" stroke-width="2" fill="none" />
+          <path
+            d="M22 11V8M22 20v-3M19 14h-3M28 14h-3M20.1 11.9l-2.1-2.1M26.1 17.9l-2.1-2.1M24.1 11.9l2.1-2.1M18.1 17.9l2.1 2.1"
+            stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+        </svg>
+        <div>
+          <div class="logo-text">R6 Meta</div>
+          <div class="logo-sub">Attachment Guide</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="https://docs.google.com/document/d/1rJ2iVGN6QAK17QpUJYsuTpt-_l5S6LfXGBv7XoL1V6w/edit?usp=sharing"
+          target="_blank" class="source-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+          Guide
+        </a>
+        <span class="season-badge">Y11S1 · Silent Hunt</span>
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Search Database</div>
+        <input type="text" class="search-input" id="searchInput" placeholder="Operator or weapon..." autocomplete="off">
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Weapon Type</div>
+        <select class="filter-select-sm" id="catFilterSelect">
+          <option value="">All Weapon Types</option>
+        </select>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Muzzle Type</div>
+        <div class="filter-pills" id="muzzleFilter"></div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Grip Type</div>
+        <div class="filter-pills" id="gripFilter"></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Underbarrel</div>
+        <div class="filter-pills" id="ubFilter"></div>
+      </div>
+
+      <div class="sidebar-section" style="margin-top: auto;">
+        <div class="results-count" id="resultsCount"></div>
+      </div>
+    </aside>
+
+    <main class="main">
+
+
+      <!-- CHARTS -->
+      <div id="chartsSection">
+        <div class="section-title">Attachment Meta</div>
+
+        <!-- LEGEND ROW -->
+        <div class="legend-row">
+          <div class="legend-card">
+            <div class="legend" id="muzzleLegend"></div>
+          </div>
+          <div class="legend-card">
+            <div class="legend" id="gripLegend"></div>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-header">
+              <div class="chart-title">Muzzle Distribution</div>
+            </div>
+            <div class="chart-wrap"><canvas id="overallMuzzleChart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Muzzle Selection by Category</div>
+            <div class="category-grid" id="muzzleCategoryGrid">
+              <div class="grid-overlay">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Grip Preference by Category</div>
+            <div class="category-grid" id="gripCategoryGrid">
+              <div class="grid-overlay">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="customTooltip" class="custom-tooltip"></div>
+      </div> <!-- END chartsSection -->
+
+      <div id="insightsSection">
+        <div class="section-title">Key Insights</div>
+        <div class="insights-grid" id="insightsGrid"></div>
+      </div> <!-- END insightsSection -->
+
+      <!-- TABLE -->
+      <div class="section-title">Full Loadout Database</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-col="Weapon">Weapon <span class="sort-icon">↕</span></th>
+              <th data-col="Operator">Operator <span class="sort-icon">↕</span></th>
+              <th data-col="Muzzle">Muzzle <span class="sort-icon">↕</span></th>
+              <th data-col="Grip">Grip <span class="sort-icon">↕</span></th>
+              <th data-col="Underbarrel">Underbarrel <span class="sort-icon">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    Data source: FortyThree's R6 Complete Attachment Guide (Y11S1 · Operation Silent Hunt) · 212 loadouts
+  </footer>
+
+  <script>
+    // === DATA ===
+    const DATA = [
+      { Category: "Assault Rifle", Weapon: "L85A2", Operator: "Sledge", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "L85A2", Operator: "Thatcher", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AR33", Operator: "Thatcher", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AR33", Operator: "Flores", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "G36C", Operator: "Ash", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "G36C", Operator: "Iana", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "R4C", Operator: "Ash", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "R4C", Operator: "Ram", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "556xi", Operator: "Thermite", Optic: "Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "556xi", Operator: "Osa", Optic: "Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "F2", Operator: "Twitch", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "F2", Operator: "Solid Snake", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AK-12", Operator: "Fuze", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AK-12", Operator: "Ace", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "552 Commando", Operator: "IQ", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "552 Commando", Operator: "Grim", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AUG A2", Operator: "IQ", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AUG A2", Operator: "Wamai", Optic: "Non-Magnified", Muzzle: "Flash Hider", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "416-C Carbine", Operator: "Jäger", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "C8-SFW", Operator: "Buck", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Mk17 CQB", Operator: "Blackbeard", Optic: "Iron Sights", Muzzle: "Extended Barrel", Grip: "Angled/Horizontal", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Para-308", Operator: "Capitão", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Para-308", Operator: "Brava", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Type-89", Operator: "Hibana", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "C7E", Operator: "Jackal", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "M762", Operator: "Zofia", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "V308", Operator: "Lion", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Spear .308", Operator: "Finka", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Spear .308", Operator: "Thunderbird", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "M4", Operator: "Striker", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "M4", Operator: "Maverick", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AK-74M", Operator: "Nomad", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "AK-74M", Operator: "Deimos", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "ARX200", Operator: "Nomad", Optic: "Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "ARX200", Operator: "Iana", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "F90", Operator: "Gridlock", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Commando 9", Operator: "Sentry", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "Commando 9", Operator: "Mozzie", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Angled/Horizontal", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "SC3000K", Operator: "Zero", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "POF-9", Operator: "Sens", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Assault Rifle", Weapon: "PCX-33", Operator: "Skopós", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "6P41", Operator: "Fuze", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "6P41", Operator: "Finka", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "G8A1", Operator: "IQ", Optic: "Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "G8A1", Operator: "Amaru", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "M249", Operator: "Striker", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "M249", Operator: "Capitão", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "M249", Operator: "Rauora", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "T95-LSW", Operator: "Ying", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "T95-LSW", Operator: "Flores", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "LMG-E", Operator: "Zofia", Optic: "Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "LMG-E", Operator: "Ram", Optic: "Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "ALDA 5.56", Operator: "Maestro", Optic: "Non-Magnified", Muzzle: "Flash Hider", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "M249 SAW", Operator: "Gridlock", Optic: "Magnified", Muzzle: "Flash Hider", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Light Machine Gun", Weapon: "DP27", Operator: "Tachanka", Optic: "Holo B or Reflex C", Muzzle: "N/A", Grip: "N/A", Underbarrel: "N/A" },
+      { Category: "Submachine Gun", Weapon: "FMG-9", Operator: "Smoke", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "FMG-9", Operator: "Nøkk", Optic: "Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "FMG-9", Operator: "Denali", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP5K", Operator: "Mute", Optic: "Non-Magnified", Muzzle: "Flash Hider", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP5K", Operator: "Wamai", Optic: "Non-Magnified", Muzzle: "Flash Hider", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "UMP45", Operator: "Castle", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "UMP45", Operator: "Pulse", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "P90", Operator: "Doc", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "P90", Operator: "Rook", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "P90", Operator: "Solis", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP5", Operator: "Doc", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP5", Operator: "Rook", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP5", Operator: "Melusi", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "9x19VSN", Operator: "Kapkan", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "9x19VSN", Operator: "Tachanka", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "9x19VSN", Operator: "Azami", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP7", Operator: "Bandit", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP7", Operator: "Zero", Optic: "Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP7", Operator: "Fenrir", Optic: "Non-Magnified", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "9mm C1", Operator: "Frost", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MPX", Operator: "Valkyrie", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MPX", Operator: "Warden", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MPX", Operator: "Tubarão", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "M12", Operator: "Caveira", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "MP5SD", Operator: "Echo", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "PDW9", Operator: "Jackal", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "PDW9", Operator: "Osa", Optic: "Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "Vector .45 ACP", Operator: "Mira", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "Vector .45 ACP", Operator: "Goyo", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "T-5 SMG", Operator: "Lesion", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "T-5 SMG", Operator: "Oryx", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "Scorpion EVO 3", Operator: "Ela", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "Scorpion EVO 3", Operator: "Denali", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "K1A", Operator: "Vigil", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "Mx4 Storm", Operator: "Alibi", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "AUG A3", Operator: "Kaid", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "P10 Roni", Operator: "Mozzie", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "P10 Roni", Operator: "Aruni", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Submachine Gun", Weapon: "UZK50GI", Operator: "Thorn", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SMG-11", Operator: "Smoke", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SMG-11", Operator: "Mute", Optic: "Non-Magnified", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SMG-11", Operator: "Amaru", Optic: "Non-Magnified", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SMG-11", Operator: "Solis", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Bearing 9", Operator: "Glaz", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Bearing 9", Operator: "Tachanka", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Bearing 9", Operator: "Hibana", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Bearing 9", Operator: "Echo", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Bearing 9", Operator: "Thunderbird", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "C75", Operator: "Dokkaebi", Optic: "N/A", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "C75", Operator: "Vigil", Optic: "N/A", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "C75", Operator: "Kali", Optic: "N/A", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "C75", Operator: "Thorn", Optic: "N/A", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "C75", Operator: "Sentry", Optic: "N/A", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SMG-12", Operator: "Dokkaebi", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "SMG-12", Operator: "Vigil", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "SMG-12", Operator: "Warden", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SPSMG9", Operator: "Clash", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "SPSMG9", Operator: "Kali", Optic: "Non-Magnified", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Rauora", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Sledge", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Ying", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Rook", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Pulse", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Oryx", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Machine Pistol", Weapon: "Reaper Mk2", Operator: "Maverick", Optic: "N/A", Muzzle: "Compensator", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Marksman Rifle", Weapon: "417", Operator: "Twitch", Optic: "Magnified B", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "417", Operator: "Lion", Optic: "Magnified A", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "Laser" },
+      { Category: "Marksman Rifle", Weapon: "417", Operator: "Sens", Optic: "Magnified A", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "417", Operator: "Rauora", Optic: "Magnified B", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "OTs-03", Operator: "Glaz", Optic: "Non-Magnified", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "CAMRS", Operator: "Buck", Optic: "Magnified A", Muzzle: "Muzzle Brake", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "CAMRS", Operator: "Brava", Optic: "Magnified B", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "SR-25", Operator: "Blackbeard", Optic: "Non-Magnified", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "Laser" },
+      { Category: "Marksman Rifle", Weapon: "SR-25", Operator: "Flores", Optic: "Magnified B", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "SR-25", Operator: "Striker", Optic: "Magnified B", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "Mk14 EBR", Operator: "Dokkaebi", Optic: "Magnified A", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "Mk14 EBR", Operator: "Aruni", Optic: "Magnified B", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "AR-15 .50", Operator: "Maverick", Optic: "Telescopic", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "AR-15 .50", Operator: "Tubarão", Optic: "Magnified A", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "PMR90A2", Operator: "Thatcher", Optic: "Magnified", Muzzle: "Muzzle Brake", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "PMR90A2", Operator: "Capitão", Optic: "Magnified", Muzzle: "Muzzle Brake", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "PMR90A2", Operator: "Hibana", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "PMR90A2", Operator: "Nøkk", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Marksman Rifle", Weapon: "PMR90A2", Operator: "Solid Snake", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M590A1", Operator: "Sledge", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "M590A1", Operator: "Thatcher", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "M590A1", Operator: "Smoke", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M590A1", Operator: "Mute", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M590A1", Operator: "Warden", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M590A1", Operator: "Deimos", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "M1014", Operator: "Thermite", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "M1014", Operator: "Castle", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M1014", Operator: "Pulse", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "M1014", Operator: "Ace", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SG-CQB", Operator: "Twitch", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Horizontal", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SG-CQB", Operator: "Doc", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SG-CQB", Operator: "Rook", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Horizontal", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SG-CQB", Operator: "Lion", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Horizontal", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SG-CQB", Operator: "Grim", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Horizontal", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SASG-12", Operator: "Kapkan", Optic: "Non-Magnified", Muzzle: "None", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SASG-12", Operator: "Finka", Optic: "Non-Magnified", Muzzle: "Suppressor", Grip: "Angled", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SASG-12", Operator: "Fenrir", Optic: "Non-Magnified", Muzzle: "None", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M870", Operator: "Bandit", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M870", Operator: "Jäger", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M870", Operator: "Thorn", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "M870", Operator: "Sentry", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "Super 90", Operator: "Frost", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "Super 90", Operator: "Melusi", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SPAS-12", Operator: "Valkyrie", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SPAS-12", Operator: "Oryx", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SPAS-15", Operator: "Caveira", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SPAS-15", Operator: "Thunderbird", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "Supernova", Operator: "Hibana", Optic: "Non-Magnified", Muzzle: "None", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "Supernova", Operator: "Echo", Optic: "Non-Magnified", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "Supernova", Operator: "Amaru", Optic: "Non-Magnified", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "ITA12L", Operator: "Jackal", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "ITA12L", Operator: "Mira", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "ITA12L", Operator: "Solis", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SIX12", Operator: "Ying", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "SIX12", Operator: "Lesion", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "SIX12", Operator: "Nøkk", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "FO-12", Operator: "Ela", Optic: "Non-Magnified", Muzzle: "Extended Barrel", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "BOSG 12.2", Operator: "Dokkaebi", Optic: "Magnified", Muzzle: "N/A", Grip: "Angled", Underbarrel: "Laser" },
+      { Category: "Shotgun", Weapon: "BOSG 12.2", Operator: "Vigil", Optic: "Magnified", Muzzle: "N/A", Grip: "Angled", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "ACS12", Operator: "Maestro", Optic: "Magnified", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "ACS12", Operator: "Alibi", Optic: "Magnified", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "ACS12", Operator: "Azami", Optic: "Magnified B", Muzzle: "N/A", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "TCSG12", Operator: "Kaid", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "TCSG12", Operator: "Goyo", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Shotgun", Weapon: "TCSG12", Operator: "Sentry", Optic: "Magnified", Muzzle: "Suppressor", Grip: "Vertical", Underbarrel: "None" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Jackal", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Mira", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Frost", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Amaru", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Melusi", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Thunderbird", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Striker", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "ITA12S", Operator: "Thermite", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Bailiff 410", Operator: "Doc", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Bailiff 410", Operator: "Alibi", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Bailiff 410", Operator: "Maestro", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Bailiff 410", Operator: "Oryx", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Bailiff 410", Operator: "Grim", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Sentry", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Castle", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Wamai", Optic: "Iron Sight", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Clash", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Gridlock", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Brava", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Super Shorty", Operator: "Mozzie", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Secondary Shotgun", Weapon: "Glaive-12", Operator: "Denali", Optic: "Non-Magnified", Muzzle: "N/A", Grip: "Angled", Underbarrel: "Laser" },
+      { Category: "Handgun", Weapon: "ALL", Operator: "Any Operator", Optic: "N/A", Muzzle: "Muzzle Brake", Grip: "N/A", Underbarrel: "Laser" },
+      { Category: "Handgun", Weapon: "P12", Operator: "IQ", Optic: "N/A", Muzzle: "Suppressor", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Handgun", Weapon: "Luison (PRB92)", Operator: "Caveira", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Handgun", Weapon: "P226", Operator: "Kali", Optic: "N/A", Muzzle: "Muzzle Brake", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Handgun", Weapon: ".44 Vendetta", Operator: "Deimos", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+      { Category: "Handgun", Weapon: "Tacit .45", Operator: "Solid Snake", Optic: "N/A", Muzzle: "N/A", Grip: "N/A", Underbarrel: "None" },
+    ];
+
+    // === HELPERS ===
+    function getCatColor(c) {
+      const colors = {
+        "Assault Rifle": "oklch(0.75 0.15 250)",    // Vibrant Blue
+        "Submachine Gun": "oklch(0.75 0.15 155)",   // Vibrant Green
+        "Machine Pistol": "oklch(0.75 0.15 345)",   // Vibrant Magenta
+        "Light Machine Gun": "oklch(0.8 0.18 95)",    // Vibrant Gold
+        "Marksman Rifle": "oklch(0.75 0.18 45)",    // Vibrant Orange
+        "Shotgun": "oklch(0.75 0.15 310)",         // Vibrant Orchid
+        "Secondary Shotgun": "var(--color-text-faint)",
+        "Handgun": "var(--color-text-faint)"
+      };
+      return colors[c] || "var(--color-text-faint)";
+    }
+    function getColor(m) {
+      const colors = {
+        "Flash Hider": "oklch(0.65 0.2 25)",       // Vibrant Crimson
+        "Compensator": "oklch(0.82 0.16 85)",       // Vibrant Gold
+        "Muzzle Brake": "oklch(0.78 0.14 250)",      // Vibrant Blue
+        "Extended Barrel": "oklch(0.78 0.16 60)",    // Vibrant Bronze
+        "Suppressor": "oklch(0.75 0.12 310)",       // Vibrant Purple
+        "N/A": "var(--color-text-faint)"
+      };
+      return colors[m] || "var(--color-text-faint)";
+    }
+    function getGripColor(g) {
+      if (g === 'N/A' || g === 'None') return "var(--color-text-faint)";
+      const colors = {
+        "Vertical": "oklch(0.75 0.1 160)",       // Tactical Sage
+        "Horizontal": "oklch(0.75 0.12 260)",     // Cobalt Blue
+        "Angled": "oklch(0.78 0.12 65)",         // Terra Cotta
+        "Angled/Horizontal": "oklch(0.75 0.05 220)" // Cool Slate
+      };
+      return colors[g] || "var(--color-text-faint)";
+    }
+    function getUBColor(u) {
+      if (u === 'Laser') return "oklch(0.65 0.25 30)"; // Vibrant Laser Red
+      return "var(--color-text-faint)";
+    }
+
+    const MUZZLE_ORDER = ["Flash Hider", "Compensator", "Muzzle Brake", "Extended Barrel", "Suppressor"];
+    const GRIP_ORDER = ["Vertical", "Horizontal", "Angled", "Angled/Horizontal"];
+    const UB_ORDER = ["Laser"];
+    const BADGE_CLASS = {
+      "Flash Hider": "badge-fh", "Compensator": "badge-comp", "Extended Barrel": "badge-ext",
+      "Muzzle Brake": "badge-mb", "Suppressor": "badge-supp", "N/A": "badge-na", "None": "badge-na"
+    };
+    const CAT_SHORT = {
+      "Assault Rifle": "AR", "Light Machine Gun": "LMG", "Submachine Gun": "SMG",
+      "Machine Pistol": "MP", "Marksman Rifle": "DMR", "Shotgun": "SG",
+      "Secondary Shotgun": "SS", "Handgun": "HG"
+    };
+    function cssVar(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim() }
+    function countBy(arr, key) { const o = {}; arr.forEach(d => { o[d[key]] = (o[d[key]] || 0) + 1 }); return o }
+
+    // === THEME TOGGLE ===
+    (function () {
+      const t = document.querySelector('[data-theme-toggle]');
+      const r = document.documentElement;
+      let d = r.getAttribute('data-theme') || 'dark';
+      const SUN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+      const MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      t.innerHTML = d === 'dark' ? SUN : MOON;
+      t.addEventListener('click', () => {
+        d = d === 'dark' ? 'light' : 'dark';
+        r.setAttribute('data-theme', d);
+        t.innerHTML = d === 'dark' ? SUN : MOON;
+        setTimeout(rebuildCharts, 200);
+      });
+    })();
+
+    // === LEGEND ===
+    function buildMuzzleLegend(counts, total) {
+      if (!counts) {
+        counts = {};
+        DATA.forEach(d => { if (d.Muzzle && d.Muzzle !== 'N/A' && d.Muzzle !== 'None') counts[d.Muzzle] = (counts[d.Muzzle] || 0) + 1; });
+        total = Object.values(counts).reduce((a, b) => a + b, 0);
+      }
+      const muzzles = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+      document.getElementById('muzzleLegend').innerHTML = muzzles.map(m => {
+        const count = counts[m] || 0;
+        const color = getColor(m);
+        return `
+      <div class="legend-item" style="--pill-color:${color}">
+        <span>${m}</span>
+        <span style="opacity:0.6; margin-left:4px; font-family:monospace">${total > 0 ? Math.round(count / total * 100) : 0}%</span>
+      </div>`;
+      }).join('');
+    }
+    function buildGripLegend() {
+      const counts = {};
+      DATA.forEach(d => { if (d.Grip && d.Grip !== 'N/A' && d.Grip !== 'None') counts[d.Grip] = (counts[d.Grip] || 0) + 1; });
+      const grips = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+      document.getElementById('gripLegend').innerHTML = grips.map(g => {
+        return `<div class="legend-item" style="--pill-color:${getGripColor(g)}">${g}</div>`;
+      }).join('');
+    }
+    function buildUnderbarrelLegend() {
+      const counts = {};
+      DATA.forEach(d => { if (d.Underbarrel && d.Underbarrel !== 'N/A' && d.Underbarrel !== 'None') counts[d.Underbarrel] = (counts[d.Underbarrel] || 0) + 1; });
+      const ubs = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+      document.getElementById('ubLegend').innerHTML = ubs.map(u => {
+        return `<div class="legend-item" style="--pill-color:${getUBColor(u)}">${u}</div>`;
+      }).join('');
+    }
+
+    // === CHARTS ===
+    let charts = [];
+    let muzzleChart;
+    const activeCats = new Set();
+    const activeMuzzles = new Set();
+    const activeGrips = new Set();
+    const activeUBs = new Set();
+    let sortCol = 'Weapon';
+    let sortDir = 1;
+
+    function destroyCharts() {
+      charts.forEach(c => c.destroy());
+      charts = [];
+      if (muzzleChart) {
+        muzzleChart.destroy();
+        muzzleChart = null;
+      }
+    }
+
+    function updateMuzzleChart() {
+      let fd = DATA;
+      const counts = {};
+      fd.forEach(d => { if (d.Muzzle && d.Muzzle !== 'N/A' && d.Muzzle !== 'None') counts[d.Muzzle] = (counts[d.Muzzle] || 0) + 1; });
+      const sortedMuzzles = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+      const total = Object.values(counts).reduce((a, b) => a + b, 0);
+      muzzleChart = new Chart(document.getElementById('overallMuzzleChart'), {
+        type: 'doughnut',
+        data: {
+          labels: sortedMuzzles,
+          datasets: [{
+            data: sortedMuzzles.map(m => counts[m]),
+            backgroundColor: sortedMuzzles.map(m => getColor(m)),
+            borderWidth: 0,
+            hoverOffset: 15
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '75%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` ${ctx.label}: ${ctx.raw} loadouts (${total > 0 ? Math.round(ctx.raw / total * 100) : 0}%)`
+              }
+            }
+          }
+        }
+      });
+
+      buildMuzzleLegend(counts, total);
+      buildGripLegend();
+    }
+
+    function updateRemainingCharts() {
+      const ds = filtered;
+      const targetCats = ["Assault Rifle", "Submachine Gun", "Light Machine Gun", "Machine Pistol", "Marksman Rifle", "Shotgun"];
+      const tooltipEl = document.getElementById('customTooltip');
+
+      const globalCatCounts = {};
+      ds.forEach(d => { if (d.Category) globalCatCounts[d.Category] = (globalCatCounts[d.Category] || 0) + 1; });
+      const sortedGlobal = Object.keys(globalCatCounts).sort((a, b) => globalCatCounts[b] - globalCatCounts[a]);
+
+      const renderGrid = (containerId, getAttach, getColorFn) => {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const overlay = container.querySelector('.grid-overlay');
+        container.innerHTML = '';
+        if (overlay) container.appendChild(overlay);
+
+        const activeCats = sortedGlobal.filter(c => targetCats.includes(c));
+
+        if (activeCats.length === 0) {
+          container.innerHTML = '<div style="font-size:11px;color:var(--color-text-muted);text-align:center;padding:20px;opacity:0.5">NO DATA FOR SELECTION</div>';
+          return;
+        }
+
+        activeCats.forEach(cat => {
+          const catData = ds.filter(d => d.Category === cat);
+          const counts = {};
+          catData.forEach(d => {
+            const val = getAttach(d);
+            if (val && val !== 'N/A' && val !== 'None') counts[val] = (counts[val] || 0) + 1;
+          });
+
+          const totalAvailable = Object.values(counts).reduce((a, b) => a + b, 0);
+          const row = document.createElement('div');
+          row.className = 'meta-row';
+          const label = document.createElement('div');
+          label.className = 'meta-label';
+          label.textContent = CAT_SHORT[cat] || cat;
+          const track = document.createElement('div');
+          track.className = 'meta-track';
+
+          if (totalAvailable > 0) {
+            const sortedAttach = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+            sortedAttach.forEach(attach => {
+              const pct = (counts[attach] / totalAvailable) * 100;
+              const pill = document.createElement('div');
+              pill.className = 'meta-pill';
+              pill.style.width = `${pct}%`;
+              pill.style.backgroundColor = getColorFn(attach);
+              pill.onmouseenter = () => {
+                let html = `<div style="font-weight:bold;margin-bottom:5px;border-bottom:1px solid #444;padding-bottom:3px">${cat}</div>`;
+                sortedAttach.forEach(a => {
+                  const p = Math.round((counts[a] / totalAvailable) * 100);
+                  const active = a === attach ? 'font-weight:bold;color:#fff' : 'opacity:0.7';
+                  html += `<div class="tooltip-row" style="${active}"><span><span class="tooltip-color" style="background:${getColorFn(a)}"></span>${a}</span><span style="font-family:monospace">${counts[a]} (${p}%)</span></div>`;
+                });
+                tooltipEl.innerHTML = html;
+                tooltipEl.style.opacity = 1;
+              };
+              pill.onmousemove = (e) => { tooltipEl.style.left = (e.clientX + 15) + 'px'; tooltipEl.style.top = (e.clientY - 20) + 'px'; };
+              pill.onmouseleave = () => { tooltipEl.style.opacity = 0; };
+              track.appendChild(pill);
+            });
+          } else {
+            track.style.opacity = '0.3'; track.style.background = 'transparent'; track.style.borderStyle = 'dashed';
+          }
+          row.appendChild(label); row.appendChild(track); container.appendChild(row);
+        });
+      };
+
+      renderGrid('muzzleCategoryGrid', d => d.Muzzle, getColor);
+      renderGrid('gripCategoryGrid', d => d.Grip, getGripColor);
+    }
+
+    function rebuildCharts() {
+      destroyCharts();
+      updateMuzzleChart();
+      updateRemainingCharts();
+      buildInsights();
+    }
+
+    // === INSIGHTS ===
+    function buildInsights() {
+      const ds = filtered;
+      if (!ds.length) {
+        const container = document.getElementById('insightsGrid');
+        if (container) container.innerHTML = '<div class="insight-card" style="grid-column:1/-1;text-align:center;opacity:0.5">No insights for current filters</div>';
+        return;
+      }
+      const smg = ds.filter(d => d.Category === 'Submachine Gun' && d.Muzzle && d.Muzzle !== 'N/A');
+      const smgComp = smg.filter(d => d.Muzzle === 'Compensator').length;
+      const ar = ds.filter(d => d.Category === 'Assault Rifle' && d.Muzzle && d.Muzzle !== 'N/A');
+      const arFH = ar.filter(d => d.Muzzle === 'Flash Hider').length;
+      const arExt = ar.filter(d => d.Muzzle === 'Extended Barrel').length;
+      const laserCount = ds.filter(d => d.Underbarrel === 'Laser').length;
+      const laserPct = Math.round(laserCount / ds.length * 100);
+      const dmrMB = ds.filter(d => d.Category === 'Marksman Rifle' && d.Muzzle === 'Muzzle Brake').length;
+      const dmrTotal = ds.filter(d => d.Category === 'Marksman Rifle' && d.Muzzle && d.Muzzle !== 'N/A').length;
+      const lmgH = ds.filter(d => d.Category === 'Light Machine Gun' && d.Grip === 'Horizontal').length;
+      const lmgTotal = ds.filter(d => d.Category === 'Light Machine Gun' && d.Grip && d.Grip !== 'N/A').length;
+
+
+      const arComp = ar.filter(d => d.Muzzle === 'Compensator');
+      const arCompList = [...new Set(arComp.map(d => d.Weapon))].join(' & ');
+
+      const insights = [
+        { tag: 'SMG Drift', color: '--accent-comp', stat: smg.length ? `${Math.round(smgComp / smg.length * 100)}% Comp` : '0% Comp', desc: `SMGs prioritize horizontal control. Only high-kick outliers like Vector/P90 require Flash Hider.`, bar: smg.length ? smgComp / smg.length : 0, barColor: '--accent-comp', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>' },
+        { tag: 'AR Meta', color: '--accent-fh', stat: (arFH + arExt) ? `${arFH}:${arExt} FH/Ext` : '0:0 FH/Ext', desc: `ARs favor vertical control. ${arCompList || 'None'} are the only rifles running Compensator in this patch.`, bar: (arFH + arExt) ? arFH / (arFH + arExt) : 0, barColor: '--accent-fh', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>' },
+        { tag: 'DMR Reset', color: '--accent-mb', stat: `100% Brake`, desc: `Universal standard for semi-autos. Muzzle Brake is required to minimize reticle bloom on rapid shots.`, bar: 1, barColor: '--accent-mb', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>' },
+        { tag: 'Utility Gap', color: '--color-orange', stat: `${laserPct}% Laser`, desc: `Essential on 185+ loadouts. Critical for shotguns and reducing hip-fire spread across all classes.`, bar: laserPct / 100, barColor: '--color-orange', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>' },
+        { tag: 'Mobility', color: '--color-blue', stat: lmgTotal ? `${Math.round(lmgH / lmgTotal * 100)}% Speed` : '0% Speed', desc: `LMGs favor Horizontal grips to offset the 1-speed penalty of heavy support ops like Gridlock.`, bar: lmgTotal ? lmgH / lmgTotal : 0, barColor: '--color-blue', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 21l-9-9 9-9M20 21l-9-9 9-9"/></svg>' },
+      ];
+      const container = document.getElementById('insightsGrid');
+      if (container) {
+        container.innerHTML = insights.map(i => `
+      <div class="insight-card fade-in">
+        <div class="insight-header">
+          <div class="insight-tag">${i.tag}</div>
+          <div class="insight-icon" style="color:var(${i.color}); background:var(--color-surface-offset)">${i.icon}</div>
+        </div>
+        <div class="insight-stat" style="color:var(${i.color})">${i.stat}</div>
+        <div class="insight-desc">${i.desc}</div>
+        <div class="insight-bar"><div class="insight-bar-fill" style="width:${Math.round(i.bar * 100)}%;background:var(${i.barColor})"></div></div>
+      </div>`).join('');
+      }
+    }
+
+    // === TABLE ===
+    let filtered = [...DATA];
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      filtered.forEach(d => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+      <td style="font-weight:700; color:var(--color-text)">${d.Weapon}</td>
+      <td style="font-weight:600; color:var(--color-text-muted); opacity:0.8">${d.Operator}</td>
+      <td style="font-weight:700; color:${getColor(d.Muzzle)}">${d.Muzzle}</td>
+      <td style="font-weight:700; color:${getGripColor(d.Grip)}">${d.Grip}</td>
+      <td style="font-weight:700; color:${getUBColor(d.Underbarrel)}">${d.Underbarrel}</td>
+    `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('resultsCount').textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const catVal = document.getElementById('catFilterSelect').value;
+      filtered = DATA.filter(d => {
+        const matchSearch = !search || d.Operator.toLowerCase().includes(search) || d.Weapon.toLowerCase().includes(search);
+        const matchCat = !catVal || d.Category === catVal;
+        const matchMuzzle = activeMuzzles.size === 0 || activeMuzzles.has(d.Muzzle);
+        const matchGrip = activeGrips.size === 0 || activeGrips.has(d.Grip);
+        const matchUB = activeUBs.size === 0 || activeUBs.has(d.Underbarrel);
+        return matchSearch && matchCat && matchMuzzle && matchGrip && matchUB;
+      });
+      filtered.sort((a, b) => {
+        const av = a[sortCol] || ''; const bv = b[sortCol] || '';
+        return av < bv ? -sortDir : av > bv ? sortDir : 0;
+      });
+
+      const isFiltered = search.length > 0 || catVal !== '' || activeMuzzles.size > 0 || activeGrips.size > 0 || activeUBs.size > 0;
+      document.getElementById('chartsSection').style.display = isFiltered ? 'none' : 'block';
+      document.getElementById('insightsSection').style.display = isFiltered ? 'none' : 'block';
+
+      renderTable();
+      if (!isFiltered) rebuildCharts();
+    }
+
+    function buildFilters() {
+      const cats = [...new Set(DATA.map(d => d.Category))].sort();
+      const catOrder = ["Assault Rifle", "Submachine Gun", "Machine Pistol", "Light Machine Gun", "Marksman Rifle", "Shotgun", "Secondary Shotgun", "Handgun"];
+      const finalCats = catOrder.filter(c => cats.includes(c));
+      const catSelect = document.getElementById('catFilterSelect');
+      catSelect.innerHTML = '<option value="">All Weapon Types</option>';
+      finalCats.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        catSelect.appendChild(opt);
+      });
+      catSelect.onchange = applyFilters;
+      const mCounts = {};
+      DATA.forEach(d => { if (d.Muzzle && d.Muzzle !== 'N/A' && d.Muzzle !== 'None') mCounts[d.Muzzle] = (mCounts[d.Muzzle] || 0) + 1; });
+      const muzzles = Object.keys(mCounts).sort((a, b) => mCounts[b] - mCounts[a]);
+
+      const mSel = document.getElementById('muzzleFilter');
+      mSel.innerHTML = '';
+      muzzles.forEach(m => {
+        const pill = document.createElement('div');
+        pill.className = `filter-pill ${activeMuzzles.has(m) ? 'active' : ''}`;
+        pill.style.setProperty('--pill-color', getColor(m));
+        pill.textContent = m;
+        pill.onclick = () => {
+          if (activeMuzzles.has(m)) activeMuzzles.delete(m); else activeMuzzles.add(m);
+          pill.classList.toggle('active');
+          applyFilters();
+        };
+        mSel.appendChild(pill);
+      });
+
+      const uCounts = {};
+      DATA.forEach(d => { if (d.Underbarrel && d.Underbarrel !== 'N/A' && d.Underbarrel !== 'None') uCounts[d.Underbarrel] = (uCounts[d.Underbarrel] || 0) + 1; });
+      const ubs = Object.keys(uCounts).sort((a, b) => uCounts[b] - uCounts[a]);
+
+      const ubSel = document.getElementById('ubFilter');
+      ubSel.innerHTML = '';
+      ubs.forEach(u => {
+        const pill = document.createElement('div');
+        pill.className = `filter-pill ${activeUBs.has(u) ? 'active' : ''}`;
+        pill.style.setProperty('--pill-color', getUBColor(u));
+        pill.textContent = u;
+        pill.onclick = () => {
+          if (activeUBs.has(u)) activeUBs.delete(u); else activeUBs.add(u);
+          pill.classList.toggle('active');
+          applyFilters();
+        };
+        ubSel.appendChild(pill);
+      });
+
+      const gCounts = {};
+      DATA.forEach(d => { if (d.Grip && d.Grip !== 'N/A' && d.Grip !== 'None') gCounts[d.Grip] = (gCounts[d.Grip] || 0) + 1; });
+      const grips = Object.keys(gCounts).sort((a, b) => gCounts[b] - gCounts[a]);
+
+      const gSel = document.getElementById('gripFilter');
+      gSel.innerHTML = '';
+      grips.forEach(g => {
+        const pill = document.createElement('div');
+        pill.className = `filter-pill ${activeGrips.has(g) ? 'active' : ''}`;
+        pill.style.setProperty('--pill-color', getGripColor(g));
+        pill.textContent = g;
+        pill.onclick = () => {
+          if (activeGrips.has(g)) activeGrips.delete(g); else activeGrips.add(g);
+          pill.classList.toggle('active');
+          applyFilters();
+        };
+        gSel.appendChild(pill);
+      });
+
+      document.getElementById('searchInput').addEventListener('input', applyFilters);
+      document.querySelectorAll('th[data-col]').forEach(th => {
+        th.addEventListener('click', () => {
+          const col = th.dataset.col;
+          if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = 1; }
+          document.querySelectorAll('th').forEach(h => h.classList.remove('sorted'));
+          th.classList.add('sorted');
+          th.querySelector('.sort-icon').textContent = sortDir === 1 ? '↑' : '↓';
+          applyFilters();
+        });
+      });
+      applyFilters();
+    }
+
+    // === INIT ===
+    buildFilters();
+    rebuildCharts();
+  </script>
+</body>
+
+</html>
