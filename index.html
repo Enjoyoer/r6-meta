@@ -311,11 +311,6 @@
       position: relative;
     }
 
-    .split {
-      grid-template-columns: minmax(0, 1fr) 360px;
-      align-items: start;
-    }
-
     .panel {
       padding: 18px;
     }
@@ -421,7 +416,6 @@
       border-color: var(--amber);
     }
 
-    .insight-list,
     .compare-list,
     .loadout-stack {
       display: grid;
@@ -429,7 +423,6 @@
       margin-top: 14px;
     }
 
-    .insight,
     .mini-card,
     .weapon-card {
       border: 1px solid var(--line);
@@ -438,13 +431,11 @@
       padding: 13px;
     }
 
-    .insight strong,
     .mini-card strong {
       display: block;
       margin-bottom: 4px;
     }
 
-    .insight span,
     .mini-card span {
       color: var(--muted);
       line-height: 1.45;
@@ -526,7 +517,6 @@
 
       .stats,
       .charts,
-      .split,
       .compare-grid {
         grid-template-columns: 1fr;
       }
@@ -630,35 +620,29 @@
             <div class="chart-box"><canvas id="categoryChart"></canvas></div>
           </article>
         </div>
-        <div class="grid split">
-          <article class="card table-shell">
-            <div class="table-head">
-              <h3 style="margin:0;">Filtered Loadouts</h3>
-              <span class="count" id="resultCount"></span>
-            </div>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th data-sort="pin">Pin</th>
-                    <th data-sort="Weapon">Weapon</th>
-                    <th data-sort="Operator">Operator</th>
-                    <th data-sort="Category">Type</th>
-                    <th data-sort="Optic">Optic</th>
-                    <th data-sort="Muzzle">Muzzle</th>
-                    <th data-sort="Grip">Grip</th>
-                    <th data-sort="Underbarrel">Underbarrel</th>
-                  </tr>
-                </thead>
-                <tbody id="loadoutTable"></tbody>
-              </table>
-            </div>
-          </article>
-          <aside class="card panel">
-            <h3>Meta Notes</h3>
-            <div class="insight-list" id="insights"></div>
-          </aside>
-        </div>
+        <article class="card table-shell">
+          <div class="table-head">
+            <h3 style="margin:0;">Filtered Loadouts</h3>
+            <span class="count" id="resultCount"></span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th data-sort="pin">Pin</th>
+                  <th data-sort="Weapon">Weapon</th>
+                  <th data-sort="Operator">Operator</th>
+                  <th data-sort="Category">Type</th>
+                  <th data-sort="Optic">Optic</th>
+                  <th data-sort="Muzzle">Muzzle</th>
+                  <th data-sort="Grip">Grip</th>
+                  <th data-sort="Underbarrel">Underbarrel</th>
+                </tr>
+              </thead>
+              <tbody id="loadoutTable"></tbody>
+            </table>
+          </div>
+        </article>
       </section>
 
       <section class="view" id="databaseView">
@@ -889,19 +873,6 @@
       }).join("");
     }
 
-    function renderInsights() {
-      const muzzle = topEntry(countBy(state.filtered, "Muzzle"), true);
-      const grip = topEntry(countBy(state.filtered, "Grip"), true);
-      const lasers = state.filtered.filter(r => r.Underbarrel === "Laser").length;
-      const magnified = state.filtered.filter(r => (r.Optic || "").toLowerCase().includes("magnified") || (r.Optic || "").toLowerCase().includes("telescopic")).length;
-      $("insights").innerHTML = [
-        [`${muzzle[0]} leads the visible muzzle set`, `${muzzle[1]} of ${state.filtered.length} filtered rows use it.`],
-        [`${grip[0]} is the most common active grip`, `${grip[1]} rows prefer it once N/A entries are ignored.`],
-        [`${lasers} visible laser recommendations`, `Useful for shotgun and secondary setup passes.`],
-        [`${magnified} magnified optic entries`, `Good quick check for attacker and DMR-heavy passes.`]
-      ].map(([title, body]) => `<div class="insight"><strong>${title}</strong><span>${body}</span></div>`).join("");
-    }
-
     function renderCharts() {
       state.charts.forEach(chart => chart.destroy());
       state.charts = [];
@@ -977,7 +948,6 @@
       renderTable("databaseTable", state.filtered);
       $("resultCount").textContent = `${state.filtered.length} result${state.filtered.length === 1 ? "" : "s"}`;
       $("databaseCount").textContent = `${state.filtered.length} of ${state.rows.length} rows shown`;
-      renderInsights();
       renderCharts();
       renderCompare();
     }
