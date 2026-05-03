@@ -450,72 +450,6 @@
       line-height: 1.45;
     }
 
-    .check-layout {
-      display: grid;
-      grid-template-columns: 310px minmax(0, 1fr);
-      gap: 16px;
-      align-items: start;
-    }
-
-    .operator-list {
-      display: grid;
-      gap: 7px;
-      max-height: 720px;
-      overflow: auto;
-      padding-right: 4px;
-    }
-
-    .operator-row {
-      min-height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 0 10px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-      color: var(--text);
-    }
-
-    .operator-row.active {
-      border-color: var(--teal);
-      box-shadow: inset 3px 0 0 var(--teal);
-    }
-
-    .operator-row.done {
-      color: var(--faint);
-      background: color-mix(in srgb, var(--panel-2) 70%, var(--green) 8%);
-    }
-
-    .progress-shell {
-      height: 10px;
-      border-radius: 999px;
-      background: var(--panel-3);
-      overflow: hidden;
-      margin: 12px 0;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--teal), var(--green));
-      transition: width 220ms ease;
-    }
-
-    .loadout-title {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .loadout-title h3 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-
     .weapon-card {
       display: grid;
       gap: 12px;
@@ -593,7 +527,6 @@
       .stats,
       .charts,
       .split,
-      .check-layout,
       .compare-grid {
         grid-template-columns: 1fr;
       }
@@ -632,13 +565,12 @@
     <aside class="sidebar">
       <div class="brand">
         <h1>R6 Meta Armory</h1>
-        <p>Y11S1 loadouts, attachment trends, and operator progress.</p>
+      <p>Y11S1 loadouts and attachment trends.</p>
       </div>
 
       <nav class="nav" aria-label="Primary">
         <button class="active" data-view-button="dashboard">Dashboard</button>
         <button data-view-button="database">Database</button>
-        <button data-view-button="checklist">Checklist</button>
         <button data-view-button="compare">Compare</button>
       </nav>
 
@@ -758,22 +690,6 @@
         </article>
       </section>
 
-      <section class="view" id="checklistView">
-        <div class="grid check-layout">
-          <aside class="card panel">
-            <h3>Operator Progress</h3>
-            <div class="progress-shell"><div class="progress-fill" id="progressFill"></div></div>
-            <div class="count" id="progressText"></div>
-            <div style="display:flex;gap:8px;margin:14px 0;">
-              <button class="ghost-button" id="resetProgress">Reset</button>
-              <button class="ghost-button" id="nextOpen">Next open</button>
-            </div>
-            <div class="operator-list" id="operatorList"></div>
-          </aside>
-          <article class="card panel" id="operatorPanel"></article>
-        </div>
-      </section>
-
       <section class="view" id="compareView">
         <div class="grid compare-grid">
           <aside class="card panel">
@@ -794,12 +710,8 @@
   <script>
     const STORAGE = {
       theme: "r6-meta-theme",
-      done: "r6-meta-done",
       pins: "r6-meta-pins"
     };
-
-    const ATTACKERS = ["Striker","Sledge","Thatcher","Ash","Thermite","Twitch","Montagne","Glaz","Fuze","Blitz","IQ","Buck","Blackbeard","Capit\u00e3o","Hibana","Jackal","Ying","Zofia","Dokkaebi","Lion","Finka","Maverick","Nomad","Gridlock","N\u00f8kk","Amaru","Kali","Iana","Ace","Zero","Flores","Osa","Sens","Grim","Brava","Ram","Deimos","Rauora","Denali","Solid Snake"];
-    const DEFENDERS = ["Sentry","Smoke","Mute","Castle","Pulse","Doc","Rook","Kapkan","Tachanka","Bandit","J\u00e4ger","Frost","Valkyrie","Caveira","Echo","Mira","Lesion","Ela","Vigil","Maestro","Alibi","Clash","Kaid","Mozzie","Warden","Goyo","Wamai","Oryx","Melusi","Aruni","Thunderbird","Thorn","Azami","Solis","Fenrir","Tubar\u00e3o","Skop\u00f3s"];
 
     const state = {
       rows: [],
@@ -811,9 +723,7 @@
       muzzle: "All",
       grip: "All",
       underbarrel: "All",
-      done: new Set(JSON.parse(localStorage.getItem(STORAGE.done) || "[]")),
       pins: new Set(JSON.parse(localStorage.getItem(STORAGE.pins) || "[]")),
-      currentOperator: null,
       charts: []
     };
 
@@ -899,10 +809,6 @@
       localStorage.setItem(STORAGE.theme, theme);
     }
 
-    function saveProgress() {
-      localStorage.setItem(STORAGE.done, JSON.stringify([...state.done]));
-    }
-
     function savePins() {
       localStorage.setItem(STORAGE.pins, JSON.stringify([...state.pins]));
     }
@@ -945,13 +851,11 @@
       const operators = uniq(state.rows.filter(r => r.Operator !== "Any Operator").map(r => r.Operator)).length;
       const weapons = uniq(state.rows.map(r => r.Weapon)).length;
       const [topMuzzle, topMuzzleCount] = topEntry(countBy(state.rows, "Muzzle"), true);
-      const completion = operators ? Math.round((state.done.size / operators) * 100) : 0;
       const stats = [
         ["Loadouts", state.rows.length, `${state.filtered.length} currently visible`],
-        ["Operators", operators, `${state.done.size} completed in tracker`],
+        ["Operators", operators, "Public recommendations covered"],
         ["Weapons", weapons, `${uniq(state.rows.map(r => r.Category)).length} weapon classes`],
-        ["Top muzzle", topMuzzle, `${topMuzzleCount} recommendations`],
-        ["Progress", `${completion}%`, "Persistent on this browser"]
+        ["Top muzzle", topMuzzle, `${topMuzzleCount} recommendations`]
       ];
       $("statsGrid").innerHTML = stats.map(([label,value,hint]) => `
         <article class="card stat">
@@ -1031,50 +935,6 @@
       }));
     }
 
-    function operatorOrder(name) {
-      const attackIndex = ATTACKERS.indexOf(name);
-      if (attackIndex >= 0) return attackIndex;
-      const defendIndex = DEFENDERS.indexOf(name);
-      if (defendIndex >= 0) return 100 + defendIndex;
-      return 300 + name.localeCompare("");
-    }
-
-    function getOperators() {
-      return uniq(state.rows.filter(r => r.Operator && r.Operator !== "Any Operator").map(r => r.Operator))
-        .sort((a,b) => operatorOrder(a) - operatorOrder(b) || a.localeCompare(b));
-    }
-
-    function renderChecklist() {
-      const operators = getOperators();
-      if (!state.currentOperator || !operators.includes(state.currentOperator)) state.currentOperator = operators[0];
-      const pct = operators.length ? Math.round((state.done.size / operators.length) * 100) : 0;
-      $("progressFill").style.width = `${pct}%`;
-      $("progressText").textContent = `${state.done.size} of ${operators.length} operators complete`;
-
-      $("operatorList").innerHTML = operators.map(op => `
-        <button class="operator-row ${state.currentOperator === op ? "active" : ""} ${state.done.has(op) ? "done" : ""}" data-operator="${escapeAttr(op)}">
-          <span>${escapeHtml(op)}</span>
-          <span>${state.done.has(op) ? "Done" : ""}</span>
-        </button>
-      `).join("");
-
-      const rows = state.rows.filter(r => r.Operator === state.currentOperator);
-      const done = state.done.has(state.currentOperator);
-      $("operatorPanel").innerHTML = `
-        <div class="loadout-title">
-          <div>
-            <h3>${escapeHtml(state.currentOperator || "No operator")}</h3>
-            <div class="count">${rows.length} weapon setup${rows.length === 1 ? "" : "s"}</div>
-          </div>
-          <button class="solid-button" id="toggleDone">${done ? "Mark open" : "Mark done"}</button>
-        </div>
-        <div class="loadout-stack">
-          ${rows.map(renderWeaponCard).join("") || `<div class="empty">No loadouts for this operator.</div>`}
-        </div>
-      `;
-      $("toggleDone")?.addEventListener("click", () => toggleOperator(state.currentOperator, true));
-    }
-
     function renderWeaponCard(row) {
       return `
         <section class="weapon-card">
@@ -1099,18 +959,6 @@
       return `<div class="attachment"><span class="label">${label}</span><span class="value ${cls}">${escapeHtml(value)}</span></div>`;
     }
 
-    function toggleOperator(op, advance) {
-      if (!op) return;
-      if (state.done.has(op)) state.done.delete(op);
-      else state.done.add(op);
-      saveProgress();
-      if (advance && state.done.has(op)) {
-        const next = getOperators().find(name => !state.done.has(name));
-        if (next) state.currentOperator = next;
-      }
-      renderAll();
-    }
-
     function renderCompare() {
       const pinned = state.rows.filter(row => state.pins.has(row._key));
       $("pinnedList").innerHTML = pinned.length ? pinned.map(row => `
@@ -1131,7 +979,6 @@
       $("databaseCount").textContent = `${state.filtered.length} of ${state.rows.length} rows shown`;
       renderInsights();
       renderCharts();
-      renderChecklist();
       renderCompare();
     }
 
@@ -1141,7 +988,6 @@
       const copy = {
         dashboard: ["Dashboard", "Current loadout mix across weapons, operators, optics, muzzles, grips, and utility picks."],
         database: ["Database", "Sortable loadout table with the active filter set applied."],
-        checklist: ["Checklist", "Operator-by-operator setup progress for this browser."],
         compare: ["Compare", "Pinned loadouts grouped for side-by-side attachment review."]
       };
       $("pageTitle").textContent = copy[view][0];
@@ -1178,11 +1024,6 @@
         renderAll();
       }
 
-      const op = event.target.closest("[data-operator]");
-      if (op) {
-        state.currentOperator = op.dataset.operator;
-        renderChecklist();
-      }
     });
 
     document.addEventListener("change", event => {
@@ -1223,20 +1064,6 @@
     $("themeToggle").addEventListener("click", () => {
       setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
       renderCharts();
-    });
-
-    $("resetProgress").addEventListener("click", () => {
-      state.done.clear();
-      saveProgress();
-      renderAll();
-    });
-
-    $("nextOpen").addEventListener("click", () => {
-      const next = getOperators().find(name => !state.done.has(name));
-      if (next) {
-        state.currentOperator = next;
-        renderChecklist();
-      }
     });
 
     $("copyFiltered").addEventListener("click", () => copyCSV(state.filtered));

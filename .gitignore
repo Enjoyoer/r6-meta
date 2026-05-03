@@ -8,3 +8,6 @@ benchmarks/
 
 # Logs
 *.log
+
+# Local-only/private tools
+private/
