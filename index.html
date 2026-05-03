@@ -728,6 +728,17 @@
     const clean = (value) => (value || "").trim();
     const keyFor = (row) => [row.Category,row.Weapon,row.Operator,row.Optic,row.Muzzle,row.Grip,row.Underbarrel].join("|");
     const uniq = (items) => [...new Set(items.filter(Boolean))].sort((a,b) => a.localeCompare(b));
+    const foldText = (value) => String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[æÆ]/g, "ae")
+      .replace(/[œŒ]/g, "oe")
+      .replace(/[øØ]/g, "o")
+      .replace(/[đÐ]/g, "d")
+      .replace(/[łŁ]/g, "l")
+      .replace(/[þÞ]/g, "th")
+      .replace(/[ß]/g, "ss")
+      .toLowerCase();
 
     function parseCSV(text) {
       const rows = [];
@@ -785,8 +796,9 @@
     }
 
     function matchRow(row) {
-      const haystack = [row.Category,row.Weapon,row.Operator,row.Optic,row.Muzzle,row.Grip,row.Underbarrel].join(" ").toLowerCase();
-      return (!state.search || haystack.includes(state.search.toLowerCase()))
+      const haystack = foldText([row.Category,row.Weapon,row.Operator,row.Optic,row.Muzzle,row.Grip,row.Underbarrel].join(" "));
+      const query = foldText(state.search);
+      return (!query || haystack.includes(query))
         && (state.category === "All" || row.Category === state.category)
         && (state.muzzle === "All" || row.Muzzle === state.muzzle)
         && (state.grip === "All" || row.Grip === state.grip)
